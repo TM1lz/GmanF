@@ -1,51 +1,67 @@
 const { DataTypes } = require("sequelize");
-const {sequelize} = require("../config/config.js");
+const { sequelize } = require("../config/config.js");
+const clienteModel = require("./cliente");
+const equipesDeManutencaoModel = require("./equipesDeManutencao");
 
-const chamadaDeManutencaoModel = sequelize.define("ChamadaDeManutencao", {
+const chamadaDeManutencaoModel = sequelize.define(
+  "ChamadaDeManutencao",
+  {
     id_manutencao: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
     },
     tipoDeManutencao: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    regiaoCliente: { 
-        type: DataTypes.STRING,
-        allowNull: true,
+    regiaoCliente: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
-
     dataManutencao: {
-        type: DataTypes.DATEONLY,
-        allowNull: false,
+      type: DataTypes.DATEONLY,
+      allowNull: false,
     },
     reagendamentoManutencao: {
-        type: DataTypes.DATEONLY,
-        allowNull: true,
+      type: DataTypes.DATEONLY,
+      allowNull: true,
     },
     pagamentoManutencao: {
-        type: DataTypes.DECIMAL(10, 2) // Tipo correto para decimal
+      type: DataTypes.DECIMAL(10, 2),
     },
     id_cliente: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: "Cliente",
-            key: "id_cliente"
-        }
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: clienteModel,
+        key: "id_cliente",
+      },
     },
     id_equipeManu: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: "EquipesDeManutencao",
-            key: "id_equipesDeManutencao"
-        }
-    }
-}, {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: equipesDeManutencaoModel,
+        key: "id_equipesDeManutencao",
+      },
+    },
+  },
+  {
     tableName: "ChamadaDeManutencao",
-    timestamps: false
+    timestamps: false,
+  }
+);
+
+// Associações
+chamadaDeManutencaoModel.belongsTo(clienteModel, {
+  foreignKey: "id_cliente",
+  as: "Cliente",
+});
+
+chamadaDeManutencaoModel.belongsTo(equipesDeManutencaoModel, {
+  foreignKey: "id_equipeManu",
+  as: "EquipeDeManutencao",
 });
 
 module.exports = chamadaDeManutencaoModel;

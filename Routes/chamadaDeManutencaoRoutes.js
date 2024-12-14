@@ -3,16 +3,16 @@ const express = require('express');
 const router = express.Router();
 const chamadaDeManutencaoController = require('../controllers/chamadaDeManutencaoController');
 
-// Rota para listar todas as chamada de manutencao
+// Rota para listar todas as chamadas de manutenção
 router.get('/chamadaDeManutencao', chamadaDeManutencaoController.listarChamadaDeManutencao);
 
-// Rota para criar uma nova chamada de manutencao
+// Rota para criar uma nova chamada de manutenção
 router.post('/chamadaDeManutencao', chamadaDeManutencaoController.criarChamadaDeManutencao);
 
-// Rota para editar uma chamada de manutencao existente
+// Rota para editar uma chamada de manutenção existente
 router.put('/chamadaDeManutencao/:id_manutencao', chamadaDeManutencaoController.editarChamadaDeManutencao);
 
-// Rota para excluir uma chamada de manutencao
+// Rota para excluir uma chamada de manutenção
 router.delete('/chamadaDeManutencao/:id_manutencao', chamadaDeManutencaoController.deletarChamadaDeManutencao);
 
 module.exports = router;

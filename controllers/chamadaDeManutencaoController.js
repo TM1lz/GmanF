@@ -6,12 +6,27 @@ const chamadaDeManutencaoController = {
     // Listar todas as chamadas de manutenção
     listarChamadaDeManutencao: async (req, res) => {
         try {
-            const chamadaDeManutencao = await chamadaDeManutencaoModel.findAll(); // Retorna todas as chamadas de manutenção
-            res.status(200).json(chamadaDeManutencao); // Retorna as chamadas de manutenção em formato JSON
+            
+            let {id_cliente} = req.query;
+            let whereCondition = {};
+
+            if(id_cliente){
+                whereCondition.id_cliente = id_cliente;
+            }
+
+          const chamadas = await chamadaDeManutencaoModel.findAll({
+            where: whereCondition ,
+            include: [
+              { model: clienteModel, as: "Cliente", attributes: ["id_cliente", "nome_cliente"] },
+              { model: equipesDeManutencaoModel, as: "EquipeDeManutencao", attributes: ["id_equipesDeManutencao", "supervisorEquipe"] },
+            ],
+          });
+          res.status(200).json(chamadas);
         } catch (error) {
-            res.status(500).send("Erro ao listar chamadas de manutenção: " + error); // Caso ocorra algum erro
+          console.error("Erro ao listar chamadas:", error);
+          res.status(500).send("Erro ao listar chamadas de manutenção.");
         }
-    },
+      },
 
     // Criar uma nova chamada de manutenção
     criarChamadaDeManutencao: async (req, res) => {
