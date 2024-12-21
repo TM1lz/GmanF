@@ -9,6 +9,11 @@ app.use(cors({
   methods: ['GET', 'POST'], // Especificar métodos permitidos
   allowedHeaders: ['Content-Type', 'Authorization'] // Cabeçalhos permitidos
 }));
+app.use((req, res, next) => {
+  console.log(`Requisição recebida: ${req.method} ${req.url}`);
+  next();
+});
+
 
 // Configuração do Sequelize
 const sequelize = new Sequelize('GmanSys', 'San_SQLLogin_1', 'eeb94y9ivn', { // Nome do banco, usuário e senha 
