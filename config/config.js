@@ -3,7 +3,7 @@ const cors = require('cors');
 const express = require('express');
 const app = express();
 
-// Configuração do CORS
+// Configuração do CORS//
 app.use(cors({
   origin: '*', // Permitir qualquer domínio
   methods: ['GET', 'POST'], // Especificar métodos permitidos
