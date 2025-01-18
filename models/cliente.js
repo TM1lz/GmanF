@@ -21,9 +21,6 @@ const clienteModel = sequelize.define("Cliente", {
     allowNull: false,
     unique: true,
   }
-}, {
-  tableName: "Cliente",
-  timestamps: false // Caso você não utilize os campos 'createdAt' e 'updatedAt'
 });
 
 module.exports = clienteModel;

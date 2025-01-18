@@ -1,28 +1,15 @@
-const Sequelize = require("sequelize");
-const cors = require('cors');
-const express = require('express');
-const app = express();
+// config/config.js
+const { Sequelize } = require('sequelize');
 
-// Configuração do CORS
-app.use(cors({
-  origin: '*', // Permitir qualquer domínio
-  methods: ['GET', 'POST'], // Especificar métodos permitidos
-  allowedHeaders: ['Content-Type', 'Authorization'] // Cabeçalhos permitidos
-}));
-app.use((req, res, next) => {
-  console.log(`Requisição recebida: ${req.method} ${req.url}`);
-  next();
-});
-
-// Configuração do Sequelize
-const sequelize = new Sequelize('GmanSys', 'San_SQLLogin_1', 'eeb94y9ivn', { 
+// Criação da instância do Sequelize
+const sequelize = new Sequelize('GmanSys', 'San_SQLLogin_1', 'eeb94y9ivn', {
   dialect: 'mssql',
   dialectModule: require('tedious'),
   host: 'GmanSys.mssql.somee.com',
-  port: 1433
+  port: 1433,
 });
 
-// Função para conectar ao banco de dados
+// Testando a conexão
 const connectToDataBase = async () => {
   try {
     await sequelize.authenticate();
@@ -32,12 +19,5 @@ const connectToDataBase = async () => {
   }
 };
 
-connectToDataBase();
-
-// Rota de exemplo
-// Iniciar o servidor
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
-});
-
+// Exportando a instância do Sequelize
+module.exports = { sequelize , connectToDataBase };

@@ -18,9 +18,14 @@ const clienteController = {
                 where: whereCondition, // Aplica o filtro na consulta
             });
 
+            if (clientes.length === 0) {
+                return res.status(404).send("Nenhum cliente encontrado.");
+            }
+
             res.status(200).json(clientes); // Retorna os clientes em formato JSON
         } catch (error) {
-            res.status(500).send("Erro ao listar clientes: " + error); // Caso ocorra algum erro
+            console.error(error); // Loga o erro para fins de debug
+            res.status(500).send("Erro ao listar clientes: " + error.message); // Retorna uma mensagem de erro mais detalhada
         }
     },
 
@@ -38,7 +43,8 @@ const clienteController = {
 
             res.status(201).json(cliente); // Retorna o cliente criado
         } catch (error) {
-            res.status(500).send("Erro ao criar cliente: " + error); // Caso ocorra algum erro
+            console.error(error); // Loga o erro para fins de debug
+            res.status(500).send("Erro ao criar cliente: " + error.message); // Retorna uma mensagem de erro mais detalhada
         }
     },
 
@@ -56,14 +62,22 @@ const clienteController = {
             }
 
             // Atualiza os dados do cliente
-            await clienteModel.update(
+            const updated = await clienteModel.update(
                 { nome_empresa, telefone_empresa, email_empresa },
                 { where: { id_cliente } }
             );
 
-            res.status(200).json({ message: "Cliente atualizado com sucesso!" }); // Retorna a mensagem de sucesso
+            if (updated[0] === 0) {
+                return res.status(400).send("Nenhuma alteração realizada.");
+            }
+
+            // Busca o cliente atualizado
+            const clienteAtualizado = await clienteModel.findByPk(id_cliente);
+
+            res.status(200).json(clienteAtualizado); // Retorna o cliente atualizado
         } catch (error) {
-            res.status(500).send("Erro ao atualizar cliente: " + error); // Caso ocorra algum erro
+            console.error(error); // Loga o erro para fins de debug
+            res.status(500).send("Erro ao atualizar cliente: " + error.message); // Retorna uma mensagem de erro mais detalhada
         }
     },
 
@@ -84,7 +98,8 @@ const clienteController = {
 
             res.status(200).json({ message: "Cliente excluído com sucesso!" }); // Retorna a mensagem de sucesso
         } catch (error) {
-            res.status(500).send("Erro ao excluir cliente: " + error); // Caso ocorra algum erro
+            console.error(error); // Loga o erro para fins de debug
+            res.status(500).send("Erro ao excluir cliente: " + error.message); // Retorna uma mensagem de erro mais detalhada
         }
     },
 };
