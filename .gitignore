@@ -1,0 +1,17 @@
+# Ignorar o arquivo .env que contém informações sensíveis
+.env
+
+# Ignorar node_modules (dependências do projeto)
+node_modules/
+
+# Ignorar logs
+logs/
+*.log
+
+# Ignorar os arquivos temporários do sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar o diretório build ou dist
+build/
+dist/
