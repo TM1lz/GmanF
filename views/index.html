@@ -1,11 +1,69 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gman</title>
+    <title>Bem-vindo ao Back End</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #4CAF50;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        /* Container dos botões */
+        .button-container {
+            display: flex;                /* Usando flexbox para alinhar os itens em linha */
+            justify-content: center;      /* Alinhando os botões ao centro */
+            gap: 20px;                    /* Espaçamento entre os botões */
+            margin-top: 30px;             /* Espaço acima dos botões */
+        }
+
+        .button-container a {
+            text-decoration: none;
+            color: #fff;
+            background-color: #007BFF;
+            padding: 15px 25px;
+            border-radius: 5px;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-container a:hover {
+            background-color: #0056b3;
+        }
+
+        /* Estilos para as páginas das rotas */
+        .route-page {
+            font-size: 24px;
+            color: #333;
+            margin-top: 50px;
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Gman Manutyenções de Empilhadeiras</h1>
+    <h1>Bem-vindo ao Back End</h1>
+    <p>Selecione uma das rotas abaixo:</p>
+    
+    <!-- Container para os botões -->
+    <div class="button-container">
+        <a href="/equipes-de-manutencao">Equipes de MNT</a>
+        <a href="/funcionarios">Funcionarios</a>
+        <a href="/chamadas-de-manutencao">Chamadas de manutencao</a>
+        <a href="/clientes">Clientes</a>
+        <a href="/equipamentos">Equipamentos</a>
+    </div>
 </body>
 </html>

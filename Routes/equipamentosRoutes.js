@@ -3,7 +3,7 @@ const router = express.Router();
 const equipamentoController = require('../controllers/equipamentoController'); // Certifique-se de que o caminho está correto
 
 // Rota para listar todos os equipamentos
-router.get('/listarequipamentos', equipamentoController.listarEquipamentos);
+router.get('', equipamentoController.listarEquipamentos);
 
 // Rota para criar um novo equipamento
 router.post('/criarequipamentos', equipamentoController.criarEquipamento);

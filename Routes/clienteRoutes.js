@@ -4,7 +4,7 @@ const router = express.Router();
 const clienteController = require('../controllers/clienteController');
 
 // Rota para listar todos os clientes
-router.get('/listarClientes', clienteController.listarClientes);
+router.get('', clienteController.listarClientes);
 router.get('/listarClientes/:id_cliente', clienteController.listarClientes);
 // Rota para criar um novo cliente
 router.post('/criarCliente', clienteController.criarCliente);

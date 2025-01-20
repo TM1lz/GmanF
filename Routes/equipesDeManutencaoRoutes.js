@@ -3,7 +3,7 @@ const router = express.Router();
 const equipesDeManutencaoController = require('../controllers/equipesDeManutencaoController'); // Importando o controlador de equipes de manutenção
 
 // Rota para listar todas as equipes de manutenção
-router.get('/listarEquipesDeManutencao', equipesDeManutencaoController.listarEquipesDeManutencao);
+router.get('', equipesDeManutencaoController.listarEquipesDeManutencao);
 
 // Rota para criar uma nova equipe de manutenção
 router.post('/criarEquipesDeManutencao', equipesDeManutencaoController.criarEquipesDeManutencao);

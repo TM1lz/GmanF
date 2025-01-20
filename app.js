@@ -1,3 +1,4 @@
+const cors = require('cors')
 const express = require("express");
 const app = express();
 const port = 3080;
@@ -16,7 +17,7 @@ const htmlPage = path.join(__dirname, "views", "index.html");
 // Conectar ao banco de dados
 const { connectToDataBase } = require("./config/config.js");
 connectToDataBase();
-
+app.use(cors())
 // Configuração do Express
 app.use(express.json()); // Para lidar com requisições JSON
 app.use(express.static(path.join(__dirname, "public"))); // Pasta para arquivos estáticos
@@ -25,13 +26,12 @@ app.use(express.static(path.join(__dirname, "public"))); // Pasta para arquivos 
 app.get("/", (req, res) => {
   res.sendFile(htmlPage);
 });
-
 // Usar as rotas com prefixo 'api'
-app.use("/api/clientes", clienteRoutes); 
-app.use("/api/funcionarios", funcionarioRoutes);
-app.use("/api/equipes-de-manutencao", equipesDeManutencaoRoutes);
-app.use("/api/chamadas-de-manutencao", chamadaDeManutencaoRoutes);
-app.use("/api/equipamentos", equipamentoRoutes);
+app.use("/clientes", clienteRoutes); 
+app.use("/funcionarios", funcionarioRoutes);
+app.use("/equipes-de-manutencao", equipesDeManutencaoRoutes);
+app.use("/chamadas-de-manutencao", chamadaDeManutencaoRoutes);
+app.use("/equipamentos", equipamentoRoutes);
 
 // Iniciar o servidor
 app.listen(port, () => {

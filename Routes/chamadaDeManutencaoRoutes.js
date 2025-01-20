@@ -5,7 +5,7 @@ const chamadaDeManutencaoController = require('../controllers/chamadaDeManutenca
 
 // Rota para listar todas as chamadas de manutenção
 router.get('/listarChamadas/:id_cliente', chamadaDeManutencaoController.listarChamadaDeManutencao);
-router.get('/listarChamadas', chamadaDeManutencaoController.listarChamadaDeManutencao);
+router.get('', chamadaDeManutencaoController.listarChamadaDeManutencao);
  // Listar todas as chamadas de manutenção
 
 // Rota para criar uma nova chamada de manutenção
